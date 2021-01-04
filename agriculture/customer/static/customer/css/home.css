@@ -1,0 +1,273 @@
+*{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 0px;
+    margin: 0px;
+
+}
+body{
+   margin: 0px;
+   padding: 0px; 
+   overflow-x: hidden;
+
+}
+.carousel{
+    width: 100%;
+    height: 650px;
+    margin-bottom: 80px;
+}
+#carousel-img{
+    height: 650px;
+    width: 100%;
+}
+
+.productbanner{
+    float: left;
+    width: 100%;
+    height: inherit;
+    padding-bottom: 80px;
+}
+
+.card{
+    overflow: hidden !important ;
+   
+} 
+
+.card:hover #card-img{
+    transform: scale(1.2);
+
+
+}
+
+.card-body h5{
+    margin: 0px;
+    text-transform: capitalize;
+
+
+}
+
+.card-image{
+    height: 300px;
+    width: 100%;
+    float: left;
+    overflow: hidden;
+} 
+
+#card-img{
+    height: 300px;
+    width: 100%;
+    transition: all .4s ease;
+}
+.card-body a{
+    text-decoration: none;
+
+}
+.card-text{
+    font-size: 18px;
+}
+
+.imagebanner{
+    height: 500px;
+    width: 100%;
+    float: left;
+    background: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)), url(../images/v.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    text-align: center;
+} 
+
+.textbanner span{
+    margin-top: 30%;
+    color: #fff;
+    padding: 0px 50px;
+    float: left;
+    width: 100%;
+    transform: translateY(60px);
+    opacity: 0;
+    transition: all .8s ease;
+    font-size: 25px;
+    
+    
+}
+.col{
+    float:left;
+}
+
+.textbanner{
+ 
+    height: 500px;
+    width: 100%;
+    float: left;
+}
+
+.footerbanner{
+    padding:50px 0px 100px 0px;
+    height: inherit;
+    width: 100%;
+    float: left;
+    background: rgba(0,0,0,.8);
+}
+.footer{
+    height: inherit;
+    width: 100%;
+    float: left;
+
+}
+.footer h1{
+    color: #fff;
+
+    
+}
+.footer a{
+    color: #ddd;
+    text-decoration: none;
+    
+}
+
+.orderbanner{
+    padding: 0px 0px 30px 0px;
+    height: inherit;
+    width: 100%;
+    float: left;
+}
+
+.osb{
+height: inherit;
+width: 100%;
+float: left;
+}
+
+#orderimg{
+    height: 300px;
+    width: 300px;
+}
+
+.orderbanner h3{
+    margin: 0px 0px 10px 0px;
+}
+
+.osb p{
+    float: left;
+    margin-left: 20px;
+    font-size: 18px;
+
+}
+.osb span:first-child{
+    margin-left: 0px;
+}
+
+
+#nextbutton{
+    margin-top:20px;
+    height: 45px;
+    width: 100%;
+    float: left;
+
+}
+
+.proceedbanner{
+    height: inherit;
+    width: 100%;
+    float: left;
+    padding: 50px 0px;
+}
+.proceed{
+    height: inherit;
+    width: 100%;
+    float: left;
+    border: 1px solid #ddd;
+    padding: 20px 15px;
+}
+
+.ptitle,
+.psubtotal,
+.ptotal,
+.pdelivery{
+    width: 100%;
+    float: left;
+    text-transform: capitalize;
+
+}
+.ptitle{
+    font-size: 20px;
+}
+
+.ptext{
+    float: left;
+    font-size: 16px;
+
+}
+.pprice{
+    float: right;
+    font-size: 16px;
+}
+
+.ptext1{
+    float: left;
+    font-size: 19px;
+
+}
+.pprice1{
+    float: right;
+    color: darkblue;
+    font-size: 19px;
+}
+.pprice input{
+    border: none;
+    width: 50px;
+}
+.pprice input:focus{
+    border: none;
+    outline-width: 0px;
+  
+}
+.pprice1 input{
+    border: none;
+    width: 50px;
+}
+.pprice1 input:focus{
+    border: none;
+    outline-width: 0px;
+  
+}
+.proceed1{
+    border: 1px solid #ddd;
+    padding: 20px 15px;
+    height: inherit;
+    width: 100%;
+    float: left;
+}
+
+.proceed1 span{
+    width: 100%;
+    float: left;
+    text-transform: capitalize;
+
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.confirm{
+    height: inherit;
+    width: 100%;
+    float: left;
+}
+#confirm, #payment, #khalti{
+    width: 100%;
+    height: 45px;
+    margin-top: 15px;
+}
+.confirm-banner{
+    height: inherit;
+    width: 100%;
+    float: left;
+}
+.confirm-banner h1{
+    padding-top: 60px;
+    color: blue;
+}
+
+.confirm-banner h3{
+    padding-bottom: 60px;
+    color: green;
+}

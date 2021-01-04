@@ -1,0 +1,13 @@
+{% extends 'customer/base1.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Add Topic Discussion
+{% endblock %}
+{% block content %}
+<form action="{% url 'addInForum' %}" method="POST" style="border:4px solid black;padding: 40px;margin-left: 25%;width: 50%;">
+    {% csrf_token %}
+    {{form|crispy}}
+    <input type="submit" class="btn btn-success" value="submit">
+</form>
+
+{% endblock %}

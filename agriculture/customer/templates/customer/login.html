@@ -1,0 +1,21 @@
+{% extends 'customer/base1.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Login as Customer
+{% endblock %}
+
+{% block content %} 
+<div class="cnat" style="width:100%; margin:60px 0 80px 0;">
+    <div class="container ">
+            <h1>Login as Customer</h1>
+       
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                {{ form|crispy}}
+                <button type="submit" class="button btn-outline-success form-control" style="width: 10%;">Login</button>
+                <a href="{% url 'changepassword' %}"><small id="emailHelp" class="form-text text-muted" style="margin-left:12%;margin-top:-2%">Forget password?</small></a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

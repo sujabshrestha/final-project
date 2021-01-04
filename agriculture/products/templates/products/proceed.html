@@ -1,0 +1,133 @@
+{% extends 'customer/base1.html' %}
+{% block title %}
+Proceed
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="proceedbanner">
+                
+                <div class="container">
+                    <h2>Confirm Order</h2>
+                    <div class="col-md-6" style="float: left;">
+                        <div class="proceed1">
+                           <span>
+                                {{detail.firstname}} {{detail.lastname}}
+                           </span>
+                           <span>
+                                 {{detail.email}}                           
+                            </span>
+                            <span>
+                                  {{detail.phone}}                         
+                            </span>
+                            <span>
+                                 {{detail.delivery}}
+                            </span>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-6" style="float: left;">
+                        <div class="proceed">
+                            <span class="ptitle">
+                                {{ prodname }}
+                            </span>
+                            <hr style="float: left;width: 100%;">
+                            <span class="psubtotal">
+                                <span class="ptext">
+                                    subtotal ( {{ packet }}packets )
+                                </span>
+                                <span class="pprice">
+                                    RS <input id="sprice" type="text" name="sprice" value="{{price}}" readonly>
+                                       
+                                    
+                                </span>                               
+                            </span>
+                            <span class="pdelivery">
+                                <span class="ptext">
+                                    Delivery Charge 
+                                </span>
+                                <span class="pprice"> 
+                                    RS <input id="dprice" type="text" name="sprice" value="100" readonly>
+                                        
+                                    
+                                </span>                               
+                            </span>
+                            <hr style="float: left;width: 100%;">
+                            <span class="ptotal">
+                                <span class="ptext1">
+                                    Total
+                                </span>
+                                <span class="pprice1">
+                                    RS <input type="text" name="sprice" id="tprice" value="{{totalprice}}" readonly>
+                                      
+                                    
+                                </span>                               
+                            </span>
+
+                    </div>
+
+                    <div class="confirm">
+                        <form action="{% url 'order' %} " method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="prodid" value="{{prodid}}" class="form-control">
+                            <input type="hidden" name="price" value="{{price}}" class="form-control">
+                            <input type="hidden" name="packet" value="{{packet}}" class="form-control">
+                            <input type="hidden" name="total" value="{{totalprice}}" id="total" class="form-control">
+                            {% if detail.delivery != '' %}
+                                
+                                <button type="submit" name="submit" class="btn btn-success" id="confirm">Cash on Delivery</button>
+                               
+                                {% else %}
+                                    <p>you have not set your delivery address or phone number please go through order and set delivery address and phone number to continue</p>
+                            {% endif %}
+                            </form>
+                            <button type="submit" name="submit" class="btn btn-success" id="payment">Pay with Khalti</button>
+                            <a href="/products/payment/"><button type="submit" name="submit" class="btn btn-success" id="khalti">Khalti Model</button></a>
+                               
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+<script src="https://unpkg.com/khalti-checkout-web@latest/dist/khalti-checkout.iffe.js"></script>
+<script>
+    var config = {
+        // replace the publicKey with yours
+        "publicKey": "test_public_key_dc74e0fd57cb46cd93832aee0a390234",
+        "productIdentity": "1234567890",
+        "productName": "Dragon",
+        "productUrl": "http://gameofthrones.wikia.com/wiki/Dragons",
+        "paymentPreference": [
+        "MOBILE_BANKING",
+        "KHALTI",
+        "EBANKING",
+        "CONNECT_IPS",
+        "SCT",
+        ],
+        "eventHandler": {
+            onSuccess (payload) {
+                // hit merchant api for initiating verfication
+                console.log(payload);
+            },
+            onError (error) {
+                console.log(error);
+            },
+            onClose () {
+                console.log('widget is closing');
+            }
+        }
+    };
+
+    var checkout = new KhaltiCheckout(config);
+    var btn = document.getElementById("payment");
+    btn.onclick = function () {
+        // minimum transaction amount must be 10, i.e 1000 in paisa.
+        checkout.show({amount: 1000});
+    }
+</script>
+{% endblock %}

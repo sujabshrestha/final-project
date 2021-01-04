@@ -1,0 +1,10 @@
+{% extends 'customer/base1.html' %}
+
+{% block content %}
+<h1 style="font-family: sans-serif; "> Search Results:</h1>
+<div class="container">
+    {% if query|length < 1 %}
+    <p>No search results</p>
+    <p>Please provide keywords</p>
+    {% endif %}
+{% endblock %}

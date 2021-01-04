@@ -1,0 +1,18 @@
+{% extends 'customer/base1.html' %}
+
+
+{% block content %}
+    <h3 style="margin-left: 50px;">Ask a public question</h3>
+    <div class="forum" style="margin: 20px;margin-left: 50px;">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <h5>Title</h3>
+                <p>Be specific and imagine you are asking the question to another person</p>
+                <label for="title" >Title</label>   <br>
+                <input type="text" id="title" name='title' class="form-control" style="width: 70%;"><br>
+                <label for="title" >Body</label>   <br>
+                <textarea name="content" id="content" cols="100" rows="10" class="form-control" style="width: 70%;"></textarea><br>
+                <input type="submit" class="btn btn-success" value="Ask question">
+        </form>
+    </div>
+{% endblock %}

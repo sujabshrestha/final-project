@@ -1,0 +1,276 @@
+{% extends 'customer/base1.html' %}
+{% block title %}
+Order Product
+{% endblock %}
+
+{% block css %}
+<style>
+    .review{
+        padding: 0px 20px;
+        height:inherit;
+        float:left;
+        width:100%;
+    }
+    .rhead{
+        width:100%;
+        float:left;
+        font-size:25px;
+        color:blue;
+        padding:15px 0px;
+    }
+    .reviewlist{
+        margin-bottom:10px ;
+        height:inherit;
+        float:left;
+        width:100%;  
+    }
+    .list1,.list2{
+        width:100%;
+        float:left;
+        padding:5px 0px;
+    }
+    .rimg{
+        height:25px;
+        width:25px;
+    }
+    .ruser{
+        padding: 0px 5px;
+        font-size:16px;
+        color:black;
+    }
+    .list2{
+        font-size:15px;
+        color:rgba(0,0,0,.8);
+    }
+    .list3{
+        float: right;
+        font-size:12px;
+        color:rgba(0,0,0,.6);
+    }
+    #page_numbers{
+            float:left;
+            width:100%;
+
+        }
+    .pagination{
+        float:right;
+    }
+    .listcover{
+        padding: 15px 5px;
+        float: left;
+        width: 100%;
+        height: auto;
+    }
+    .listdemo{
+        display: none;
+        margin-top: -30px;
+        margin-left: 180px;
+        float: left;
+        width: 250px;
+        height: 300px;
+        overflow-y:scroll;
+        background::rgba(0,0,0,.05);
+        padding: 20px 10px;
+
+    }
+    .plist1{
+        float: left;
+        width: 25%;
+      
+    }
+    .plist2{
+        float: left;
+        width: 75%;
+        padding: 0px 10px;
+    }
+    .subplist1{
+        float: left;
+        width: 100%;
+        font-size: 16px;
+    }
+    .subplist2{
+        
+        float: left;
+        width: 100%;
+        font-size: 14px;
+        color: rgba(0,0,0,.7);
+    }
+    .pimg{
+        height: 50px;
+        width: 40px;
+    }
+    .head{
+        width: 100%;
+        float: left;
+        font-size: 17px;
+        color: blue;
+        padding: 10px 10px;
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="orderbanner" style="padding: 0px 0px 30px 0px;width: 100%;">
+              
+                <div class="container" style="display: flex;"> 
+                    
+                    <div class="osb" style="flex-basis: 50%;">
+                        <img src="{{ product.image.url }}" id="orderimg" alt="" style=" height: 500px;width: 500px;margin-left: 15px;">
+                    </div>
+                   <div class="right" style="flex-basis: 50%; float: right;">
+                    Name:<h3>{{product.title}}</h3>
+                    Seller:<h4>{{product.author}}</h4>
+                    <div class="osb" style="margin-bottom: 15px;">
+                        Description:
+                        <p style="font-size: 14px;font-weight: 1000;">{{ product.content }}</p>
+                    </div>
+                    <div class="osb" style="font-size: 20px; color:blue; margin-bottom: 15px;margin-top: -3%;">
+                        NPR <span id="price">{{product.price}}</span> 
+                    </div>
+                    <div class="osb" style="margin-bottom: 15px;">
+                        <p id="pac1"> <input type="radio" name=""  id="pacradio1"> 1 packet</p>
+                        <p id="pac2"> <input type="radio" name=""  id="pacradio2"> 3 packet</p>
+                        <p id="pac3"> <input type="radio" name=""  id="pacradio3"> 5 packet</p>
+                        
+                    </div>
+                    <div class="osb">
+                        <form action="{% url 'proceedorder' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="prodid" value="{{product.id}}" style="display: none;">
+                            <input type="hidden" name="packet" value="" id="packet">
+                            <input type="hidden" name="price" value="" id="totalprice">
+                            <button type="submit" class="btn btn-primary" style="margin-top: -3%;">Proceed To Order</button>
+                        </form>
+                        <button class="btn btn-primary" id="compare" style="margin-left:41% ;margin-top: -12%;">Compare product</button>
+                      
+                        <div class="reply"> 
+                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="replyBox" style="margin-left: 27%;margin-top: -21%;" id="review">Review</button>
+                          <div class="collapse" id="collapseExample">
+                            <div class="card card-body" id="rcard" style="margin-top: -7%;width: 60%;">
+                                <form method="POST" action="/products/review/">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="review">Review</label>
+                                        <input type="hidden" name="productid" value="{{product.id}}">
+                                        <input type="text" class="form-control" name="review" id="review" placeholder="Enter your review.">
+                                    </div>
+                                    <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                                </form>
+
+                              
+                            </div>
+                           
+                          </div>
+                       </div>
+                       <div class="listdemo">
+                           <span class="head">
+                                Select Product
+                           </span>
+                           {% if allprod %}
+                           {% for p in allprod %}
+                           <a href="/products/compare/{{product.id}}/{{p.id}}/">
+                        <div class="listcover">
+                            <span class="plist1">
+                                <img src="/media/{{p.image}}" class="pimg" alt="">
+                            </span>
+                            <span class="plist2">
+                                <span class="subplist1">
+                                    {{p.title}}
+                                </span>
+                                <span class="subplist2">
+                                    {{p.category}}
+                                </span>
+                            </span>
+                        </div> 
+                        </a>
+                        {% endfor %}  
+                        {% else %}
+                        <p>
+                            no product available to compare
+                        </p>
+                        {% endif %}
+                    </div>
+                    
+                        
+                    </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="container">
+                <div class="review">
+                    
+                    {% for reviews, range in allreviews %}
+                    {% if reviews %}
+                    <span class="rhead">
+                        Review
+                    </span>
+                    {% for r in reviews %}
+                    <div class="reviewlist">
+                        <span class="list1">
+                            <span>
+                                <img src="/media/{{r.image}}" class="rimg" alt="">
+                            </span>
+                            <span class="ruser">
+                                {{r.username}}
+                                
+                            </span>
+                            <span class="list3">
+                                {{r.date_posted}}
+                            </span>
+                        </span>
+                        <span class="list2">
+                            {{r.review}}
+                        </span>
+                       
+                    </div>
+                    {% endfor %}
+                    <span id="page_numbers">
+                        {% if reviews.has_other_pages %}
+                          <ul class="pagination">
+                            {% if reviews.has_previous %}
+                              <li><a href="?page={{ reviews.previous_page_number }}">&laquo;</a></li>
+                            {% else %}
+                              <li class="prev_disabled">&laquo;</li>
+                            {% endif %}
+                            {% for i in reviews.paginator.page_range %}
+                              {% if reviews.number == i %}
+                                <li class="">{{ i }}</li>
+                              {% else %}
+                                <li><a href="?page={{ i }}">{{ i }}</a></li>
+                              {% endif %}
+                            {% endfor %}
+                            {% if reviews.has_next %}
+                              <li><a href="?page={{ reviews.next_page_number }}">&raquo;</a></li>
+                            {% else %}
+                              <li class="next_disabled">&raquo;</li>
+                            {% endif %}
+                          </ul>
+                        {% endif %}
+                        </span>
+                        
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script>
+        $('#compare').click(function(){
+            $('.listdemo').show();
+            $('#rcard').hide();
+        });
+        $('#review').click(function(){
+            $('.listdemo').hide();
+            $('#rcard').show();
+        });
+    </script>
+{% endblock %}

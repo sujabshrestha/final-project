@@ -1,0 +1,94 @@
+{% extends 'customer/base1.html' %}
+{% block title %}
+Payment
+{% endblock %}
+{% block css %}
+<style>
+.confighead{
+    font-size: 22px;
+    color: green;
+    width: 100%;
+    float: left;
+    padding: 20px 0px;
+}
+.payment1{
+        width: 100%;
+        float: left;
+        height: inherit;
+        padding: 10px 20px;
+}
+.chead{
+    font-size: 20px;
+    color: blue;
+    width: 100%;
+    float: left;
+    padding: 5px 0px 15px 0px;
+}
+.config-info{
+    font-size: 17px;
+    color: black;
+    width: 100%;
+    float: left;
+}
+</style>
+{% endblock %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <span class="confighead">
+            Configuration for khalti
+        </span>
+        <div class="col col-md-6">
+            <div class="payment1">
+                <span class="chead">
+                    Send info
+                </span>
+                <span class="config-info">
+                    "publicKey": <font style="color:blue;">"test_public_key_dc74e0fd57cb46cd93832aee0a390234"</font>
+                </span>
+                <span class="config-info">
+                    "productIdentity": "64351"
+                </span>
+                <span class="config-info">
+                    "productName": ""
+                </span>
+                <span class="config-info">
+                    "productUrl": "http://rentstaion.com/product_view/bluster-neck-maxi/"
+                </span>
+            </div>
+        </div>
+        <div class="col col-md-6">
+            <div class="payment1">
+                <span class="chead">
+                    Get info
+                </span>
+                <span class="config-info">
+                    amount: 1000 (in paisa)
+                </span>
+                <span class="config-info">
+                    <font style="color:blue;">idx: 'MyDpaupshWksY2oooYu'</font>
+                </span>
+                <span class="config-info">
+                    <span style="width:15%;float:left; color:rgba(0,0,0,.7)">mobile:</span> <span id="mobile_khalti" style="width:10%; float:left; color:rgba(0,0,0,.7)">986516554</span>
+                </span>
+                <span class="config-info">
+                    product_identity: '6582'
+                </span>
+                <span class="config-info">
+                    product_name: 'bluster neck maxi'
+                </span>
+                <span class="config-info">
+                    product_url: 'http://rentstaion.com/product_view/bluster-neck-maxi/'
+                </span>
+                <span class="config-info">
+                    <font style="color:blue;">token: '056kajsdbfiDu7kabsd8'</font>
+                </span>
+                <span class="config-info">
+                    <font style="color:blue;">widget_id: 'khalti-widget-65351864'</font>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+  
+{% endblock %}

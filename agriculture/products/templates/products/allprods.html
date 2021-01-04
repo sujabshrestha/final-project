@@ -1,0 +1,91 @@
+{% extends 'customer/base1.html' %}
+{% block title %}
+All products
+{% endblock %}
+{% block css %}
+<style>
+     #page_numbers{
+            float:left;
+            width:100%;
+
+        }
+        .pagination{
+            float:right;
+        }
+        .product_not_found{
+            float:left;
+            width:100%;
+            height:inherit;
+            padding: 50px 0px;
+        }
+        .u_info span{
+            float:left;
+            width:100%;
+            text-transform: capitalize;
+        }
+</style>
+{% endblock %}
+{% block content %}
+<div class="cont" style="width: 100%;  height: auto; float: left;">
+<div class="container">
+    <h1>All products</h1>
+
+    {% if products|length != 0 %}
+   
+    {% for products,range in products %}
+    {% for product in products %}
+        <div class="col-md-3 mt-3 " style="float:left;">
+        
+            <div class="card" >
+              <div class="card-image">
+                <img class="card-img-top" src="{{ product.image.url }}" id="card-img" alt="Card image cap">
+              </div>
+           
+            <div class="card-body">
+                <a href="{% url 'orderdetail' product.id %}"><h5 class="card-title">{{ product.title }}</h5></a>
+                <p class="card-text">NPR {{ product.price }}</p>
+                <a href="{% url 'orderdashboard' product.id %}" class="btn btn-primary">Order Now</a>
+            </div>
+            </div>
+            
+            
+        </div>    
+    {% endfor %}
+    <span id="page_numbers">
+        {% if products.has_other_pages %}
+          <ul class="pagination">
+            {% if products.has_previous %}
+              <li><a href="?page={{ products.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+              <li class="prev_disabled">&laquo;</li>
+            {% endif %}
+            {% for i in products.paginator.page_range %}
+              {% if products.number == i %}
+                <li class="">{{ i }}</li>
+              {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if products.has_next %}
+              <li><a href="?page={{ products.next_page_number }}">&raquo;</a></li>
+            {% else %}
+              <li class="next_disabled">&raquo;</li>
+            {% endif %}
+          </ul>
+        {% endif %}
+        </span>
+    {% endfor %}
+
+    {% else %}
+    <div class="product_not_found">
+        <h6>There is no recent orders.</h6>
+    </div>
+    {% endif %}
+    
+  
+
+  </div>
+</div>   
+{% endblock %}
+
+

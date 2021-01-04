@@ -1,0 +1,120 @@
+{% extends 'customer/base1.html' %}
+{% block title %}
+Update Product
+{% endblock %}
+{% block css %}
+    <style>
+       .form-control{
+           width: 80%;
+       }
+       #price{
+           width: 50%;
+       }
+       .composition,.benifits{
+           display: none;
+       }
+       .addproduct span{
+           width:100%;
+           float:left;
+           margin-bottom:10px;
+       }
+       .cat{
+           background: blue;
+           color: white;
+           padding: 5px 8px;
+       }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="container">
+            <div class="addproduct">
+                <form  method="POST" action="/seller/updateproduct/{{product.id}}/"  enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for m in messages %}
+                    <div class="alert alert-success" role="alert"> 
+                          {{m}}
+                    </div>
+                    {% endfor %}   
+                    
+                    <span>
+                        <label for="title" >Title</label>
+                        <input type="text" id="title" value="{{ product.title }}" name='title' class="form-control">
+                    </span>
+                    <span>
+                        <label for="category">Category:</label>  <br>
+                        <label class="cat">{{product.category}}</label>
+                        <input type="hidden" name="category" value="{{product.category}}">
+                    </span>
+                    <span class="p_type">
+                        <label for="p_type" >Type</label>
+                        <input type="p_type" id="p_type" value="{{ product.p_type }}" name='p_type' class="form-control">
+                    </span>
+                    <span class="growingperiod">
+                        <label for="growingperiod">Growingperiod</label>   
+                        <input type="text" id="growingperiod" value="{{ product.growingperiod }}"  name='growingperiod' class="form-control">
+                    </span>
+                    <span class="climate">
+                        <label for="climate">Climate</label>
+                        <input type="text" id="climate" value="{{ product.climate }}" name='climate' class="form-control">
+                    </span>
+                    <span class="soilfertility">        
+                        <label for="soilfertility">Soilfertility</label>   
+                        <input type="text" id="soilfertility" name='soilfertility' class="form-control">
+                    </span>
+                    <span class="area">
+                        <label for="area">Area</label>   
+                        <input type="text" id="area" name='area' class="form-control">
+                    </span>
+                    <span class="composition">
+                        <label for="composition">Composition</label>   
+                        <input type="text" id="composition" value="{{ product.fcomposition }}" name='composition' class="form-control">
+                    </span>
+                    <span class="benifits">
+                        <label for="benifits">Benifits</label>   
+                        <input type="text" id="benifits" name='benifits' class="form-control">
+                    </span>
+                    <span class="healthbenifits">
+                        <label for="healthbenifits">Healthbenifits</label>   
+                        <input type="text" id="healthbenifits" name='healthbenifits' class="form-control">
+                    </span>
+                    <span class="image">
+                        <label for="image" >Image</label>   
+                        <input type="file" id="image" name='image' class="form-control">
+                    </span>
+                    <span class="content">
+                        <label for="content" >Description</label>   
+                        <textarea name="content" id="content" cols="100" rows="10" class="form-control"></textarea>
+                    </span>
+                    <span class="price">
+                        <label for="price" >Price</label>   
+                        <input type="number" id="price" name='price' class="form-control">
+                    </span>
+                    <span>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </span>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+<script>
+    
+        var cat = $('.cat').text();
+        if(cat == 'fertilizers'){
+            $(".area, .soilfertility, .climate, .healthbenifits, .growingperiod").hide();
+            $(".benifits, .composition").show();
+        }else{
+            $(".area, .soilfertility, .climate, .healthbenifits, .growingperiod").show();
+            $(".benifits, .composition").hide();
+        }
+
+</script>
+{% endblock %} 

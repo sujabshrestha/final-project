@@ -1,0 +1,41 @@
+{% extends 'customer/base1.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="container">
+            <div class="confirmorder" style="text-align: center;margin:200px 0px;">
+                <h1>Your order has been placed successfully!!!</h1>
+                <h4>Your order no is: <span style="color: blue;">{{ordernumber}}</span> use this to track your order status</h4>
+                <button type="button" class="btn btn-success" id="track_btn_ord" data-toggle="modal" data-target="#TrackOrder">
+                    TRACK MY ORDER
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <!-- Search modal *********** -->
+
+    <div class="modal fade" id="TrackOrder" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+        <div class="modal-dialog" role="document" style="text-align:center;">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h6 id="title" style="text-align:center; margin:0px auto;">Track Your Order</h6>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left:0px;">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form method="POST" action="{% url 'ordertracker' %}" id="searchForm">
+                {% csrf_token %}
+              <div class="modal-body">
+                <input type="text" name="ordernumber" id="ordernumber" placeholder="Enter your order number" style="width:80%;"/>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="submit" id="track_btn">Track Order</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+<!-- ******************************* -->
+{% endblock %}

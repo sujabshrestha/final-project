@@ -1,0 +1,273 @@
+{% extends 'customer/base1.html' %}
+{% block title %}
+Compare Product
+{% endblock %}
+{% block css %}
+<style>
+    .col{
+        float: left;
+    }
+    .product1banner{
+        height: auto;
+        float: left;
+        width: 100%;
+       
+    }
+    .imgbannercom{
+        float: left;
+        width: 100%;
+        height: 300px;
+        background: url('/media/{{product1.image}}');
+        background-size:cover;
+        background-position:center center;
+        background-repeat: no-repeat;
+    }
+    .imgbannercom2{
+        float: left;
+        width: 100%;
+        height: 300px;
+        background: url('/media/{{product2.image}}');
+        background-size:cover;
+        background-position:center center;
+        background-repeat: no-repeat;
+    }
+   
+    .textbannercom{
+        float: left;
+        width: 100%;
+        height: inherit;
+        
+        padding: 15px 20px;
+    }
+    .image{
+        width: 100%;
+        height: 300px;
+    }
+    .text{
+        height: 120px;
+        width: 100%;
+        float: left;
+        
+    }
+    .text:-child{
+
+    }
+    .label{
+        width: 100%;
+        float: left;
+        font-size: 20px;
+        color: blue;
+        text-transform: capitalize;
+    }
+    .content{
+        width: 100%;
+        float: left;
+        font-size: 17px;
+    }
+    .comhead{
+        width: 100%;
+        float: left;
+        font-size: 22px;
+        color: green;
+        padding: 15px 0px;
+    }
+    .contenttype {
+        padding-top: 4px;
+        float: left;
+        font-size: 17px; 
+    }
+    .labeltype{
+        padding-right: 8px;
+        float: left;
+        font-size: 20px;
+        color: blue;
+        text-transform: capitalize; 
+    }
+    .texttype{
+        height: 50px;
+        width: 100%;
+        float: left;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="col col-md-6">
+        <div class="product1banner">
+            <span class="comhead">  
+                {{product1.title}}
+            </span>
+            <div class="imgbannercom">
+                
+            </div>
+            <div class="textbannercom">
+                {% if product1.category == 'vegetable(seed)' %}
+                <span class="texttype">  
+                    <span class="labeltype">
+                       type:
+                    </span>
+                    <span class="contenttype">
+                        {{product1.p_type}}
+                    </span>
+                </span>
+                <span class="text">  
+                    <span class="label">
+                      growingperiod
+                    </span>
+                    <span class="content">
+                        {{product1.growingperiod}}
+                    </span>
+                </span>
+                <span class="text">  
+                    <span class="label">
+                        climate
+                    </span>
+                    <span class="content">
+                        {{product1.climate}}
+                    </span>
+                </span>
+                <span class="text">  
+                    <span class="label">
+                      soil fertility
+                    </span>
+                    <span class="content">
+                       {{product1.soilfertility}}
+                    </span>
+                </span>
+                <span class="text">  
+                    <span class="label">
+                        health benifits
+                    </span>
+                    <span class="content">
+                        {{product1.healthbenifits}}
+                    </span>
+                </span>
+                <span class="text">  
+                    <span class="label">
+                        area
+                    </span>
+                    <span class="content">
+                       {{product1.p_area}}
+                    </span>
+                </span>
+                {% else %}
+                <span class="texttype">  
+                    <span class="labeltype">
+                       type:
+                    </span>
+                    <span class="contenttype">
+                        {{product2.p_type}}
+                    </span>
+                </span>
+                <span class="text">  
+                    <span class="label">
+                        Compositions
+                    </span>
+                    <span class="content">
+                        {{product1.fcomposition}}
+                    </span>
+                </span>
+                <span class="text">  
+                    <span class="label">
+                        Benifits
+                    </span>
+                    <span class="content">
+                       {{product1.benifits}}
+                    </span>
+                </span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col col-md-6">
+        <div class="product1banner">
+            <span class="comhead">  
+                {{product2.title}}
+            </span>
+            <div class="imgbannercom2">
+                
+            </div>
+            <div class="textbannercom">
+                {% if product2.category == 'vegetable(seed)' %}
+                
+                <span class="texttype">  
+                    <span class="labeltype">
+                       type:
+                    </span>
+                    <span class="contenttype">
+                        {{product2.p_type}}
+                    </span>
+                </span>
+                <span class="text">  
+                    <span class="label">
+                      growingperiod
+                    </span>
+                    <span class="content">
+                        {{product2.growingperiod}}
+                    </span>
+                </span>
+                <span class="text">  
+                    <span class="label">
+                        climate
+                    </span>
+                    <span class="content">
+                        {{product2.climate}}
+                    </span>
+                </span>
+                <span class="text">  
+                    <span class="label">
+                      soil fertility
+                    </span>
+                    <span class="content">
+                       {{product2.soilfertility}}
+                    </span>
+                </span>
+                <span class="text">  
+                    <span class="label">
+                        health benifits
+                    </span>
+                    <span class="content">
+                        {{product2.healthbenifits}}
+                    </span>
+                </span>
+                <span class="text">  
+                    <span class="label">
+                        area
+                    </span>
+                    <span class="content">
+                       {{product2.p_area}}
+                    </span>
+                </span>
+                {% else %}
+                <span class="texttype">  
+                    <span class="labeltype">
+                       type:
+                    </span>
+                    <span class="contenttype">
+                        {{product2.p_type}}
+                    </span>
+                </span>
+                <span class="text">  
+                    <span class="label">
+                        Compositions
+                    </span>
+                    <span class="content">
+                        {{product2.fcomposition}}
+                    </span>
+                </span>
+                <span class="text">  
+                    <span class="label">
+                        Benifits
+                    </span>
+                    <span class="content">
+                       {{product2.benifits}}
+                    </span>
+                </span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}

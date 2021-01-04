@@ -1,0 +1,44 @@
+{% extends 'customer/base1.html' %}
+{% block title %}
+Products
+{% endblock %}
+{% block content %}
+<div class="cont" style="width: 100%;  height: auto; float: left;">
+    <div class="container">
+                {% if cat %}
+                <h1 style="text-transform: capitalize;">{{cat}}</h1>
+                {% else %}
+                <h1>All products</h1>
+                {% endif%}
+                {% if products|length != 0 %}
+            
+                {% for product in products %}
+                <div class="col col-md-3 mt-4">
+
+                    <div class="card" style="width: 15rem;">
+                    <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap" style="height: 300px;">
+                    <div class="card-body">
+                        <a href="/products/orderdetail/{{product.id}}"><h5 class="card-title">{{ product.title }}</h5></a>
+                        <p style="font-weight:76;"> NPR {{ product.price }}</p>
+                        <a href="/products/orderdashboard/{{product.id}}" class="btn btn-primary form-control">Order Now</a>
+                    </div>
+                    
+                    </div>
+                    <hr>
+                    
+                </div>  
+                    
+                {% endfor %}
+        
+                {% else %}
+                <div class="product_not_found">
+                    <h6>There is no recent orders.</h6>
+                </div>
+                {% endif %}
+        </div>
+        
+      
+    
+   
+    </div>
+{% endblock %}

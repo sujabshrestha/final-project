@@ -1,0 +1,102 @@
+{% extends 'customer/base.html' %}
+{% block title %}
+Home
+{% endblock %}
+
+{% block order %}
+<div class="row">
+
+  
+  <div class="container">
+    <div class="productbanner"> 
+    <h1>Most ordered Products</h1>
+    {% for mostproducts,range in mostorder %}
+    {% for product in mostproducts %}
+        <div class="col-md-3 mt-3 " style="float:left;">
+        
+            <div class="card" >
+              <div class="card-image">
+                <img class="card-img-top" src="{{ product.image.url }}" id="card-img" alt="Card image cap">
+              </div>
+           
+            <div class="card-body">
+                <a href="{% url 'orderdetail' product.id %}"><h5 class="card-title">{{ product.title }}</h5></a>
+                <p class="card-text">NPR {{ product.price }}</p>
+               
+               
+                <a href="{% url 'orderdashboard' product.id %}" class="btn btn-primary">Order Now</a>
+            </div>
+           
+            </div>
+            
+             
+        </div> 
+        
+    {% endfor %}
+   
+    {% endfor %}
+     
+  </div>
+  
+  </div>
+ 
+{% endblock %}
+
+
+
+{% block content %}
+  <div class="row">
+
+  
+  <div class="container">
+    <div class="productbanner"> 
+    <h1>Products</h1>
+    {% for products,range in products %}
+    {% for product in products %}
+        <div class="col-md-3 mt-3 " style="float:left;">
+        
+            <div class="card" >
+              <div class="card-image">
+                <img class="card-img-top" src="{{ product.image.url }}" id="card-img" alt="Card image cap">
+              </div>
+           
+            <div class="card-body">
+                <a href="{% url 'orderdetail' product.id %}"><h5 class="card-title">{{ product.title }}</h5></a>
+                <p class="card-text">NPR {{ product.price }}</p>
+                <a href="{% url 'orderdashboard' product.id %}" class="btn btn-primary">Order Now</a>
+            </div>
+            </div>
+            
+            
+        </div>    
+    {% endfor %}
+    {% endfor %}
+  </div>
+  </div>
+ 
+  </div>
+   <!-- footer  -->
+    <div class="row">
+      <div class="col-12" style="padding: 0px;">
+      <div class="imagebanner">
+        <div class="container">
+          <div class="col-2" style="float: left;">
+
+          </div>
+          <div class="col-8" style="float: left;">
+            <div class="textbanner">
+              <span class="text"> A seed neither fears light nor darkness, but uses both to grow</span>
+            </div>
+          </div>
+         
+          <div class="col-2" style="float: left;">
+
+          </div>
+         
+        </div>
+      
+       
+      </div>
+    </div>
+    </div>
+{% endblock %}

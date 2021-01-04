@@ -1,0 +1,28 @@
+{% extends 'customer/base1.html' %}
+{% block title %}
+Update Profile
+{% endblock %}
+{% block content %}
+
+
+<div class="container">
+    <div class="updateprof">
+        <form action="/seller/profupdate/" method="POST" enctype="multipart/form-data">
+            
+            {% csrf_token %}
+
+            <label for="first_name" >first name</label>   <br>
+            <input type="text" id="first_name" name='first_name' class="form-control" value="{{ user.first_name }}"><br>
+            <label for="username" >Last_name</label>   <br>
+            <input type="text" id="last_name" name='last_name' class="form-control" value="{{ user.last_name }}"><br>
+            <label for="username" >Phone Number</label>   <br>
+            <input type="text" id="phone" name='phone' class="form-control" value="{{ details.phone }}"><br>
+            <label for="username" >Address</label>   <br>
+            <input type="text" id="address" name='address' class="form-control" value="{{ details.address }}"><br>
+            <label for="image">Image</label>   <br>
+            <input type="file" name="image" id="image"><br><br>
+          <button type="submit" class="btn tbn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

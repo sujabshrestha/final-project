@@ -1,0 +1,14 @@
+{% extends 'customer/base1.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="about" style="display: flex;">
+        <div class="image" style="flex-basis: 50%;">
+            <img style="height: 500px;width: 90%;margin-left: 20px;" src="{% static 'customer/images/1.jpg' %}" alt="">
+        </div>
+        <div class="content" style="flex-basis: 50%; align-content: center;">
+            <h1 style="text-align: center; font-size: 50px; margin-top: 90px;">About us</h1>
+            <p style="font-size: 18px; width: 90%; text-align: center; color: #282828;">e-Agriculture is an online platform that helps the customer to buy seeds and fertilizers and gain required information about them. By creating an online platform for buying and selling of agriculture-based products, the time required by any of the customers/buyers or sellers can be minimized by quite a good number of time. This website majorly focuses on the seeds as well as fertilizers that suits perfectly for those seeds.</p>
+        </div>
+    </div>
+{% endblock %}

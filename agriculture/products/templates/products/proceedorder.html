@@ -1,0 +1,92 @@
+{% extends 'customer/base1.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="proceedbanner">
+                
+                <div class="container">
+                    <h2>Proceed To Order</h2>
+                    <div class="col-md-6" style="float: left;">
+                        <div class="proceed">
+                            <form action="{% url 'proceed' %}" method="POST" name="subform">
+                                {% csrf_token %}
+                                <label for="">Delivery Address</label>
+                                <input type="text" name="deliveryaddress" class="form-control" value="{{customer.delivery}}">
+                                <label for="">Phone Number</label>
+                                <input type="number" name="phone" class="form-control" value="{{customer.phone}}">
+                                <input type="hidden" name="prodid" value="{{prodid}}" class="form-control">
+                                <input type="hidden" name="price" value="{{price}}" class="form-control">
+                                <input type="hidden" name="packet" value="{{packet}}" class="form-control">
+                                <input type="hidden" name="total" value="" id="total" class="form-control">
+                                <p id="error1" style="display: none; color:red">Invalid Phone</p>
+                                <p id="error2" style="display: none; color:red">Invalid Information</p>
+                
+                                <button type="button" class="btn btn-success" id="nextbutton">Next</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="float: left;">
+                        <div class="proceed">
+                            <span class="ptitle">
+                                {{ prodname }}
+                            </span>
+                            <hr style="float: left;width: 100%;">
+                            <span class="psubtotal">
+                                <span class="ptext">
+                                    subtotal ( {{ packet }}packets )
+                                </span>
+                                <span class="pprice">
+                                    RS <input id="sprice" type="text" name="sprice" value="{{price}}" readonly>
+                                       
+                                    
+                                </span>                               
+                            </span>
+                            <span class="pdelivery">
+                                <span class="ptext">
+                                    Delivery Charge 
+                                </span>
+                                <span class="pprice"> 
+                                    RS <input id="dprice" type="text" name="sprice" value="100" readonly>
+                                        
+                                    
+                                </span>                               
+                            </span>
+                            <hr style="float: left;width: 100%;">
+                            <span class="ptotal">
+                                <span class="ptext1">
+                                    Total
+                                </span>
+                                <span class="pprice1">
+                                    RS <input type="text" name="sprice" id="tprice" value="" readonly>
+                                      
+                                    
+                                </span>                               
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+<script>
+
+    $('#nextbutton').on('click', function(){
+        var delivery = $('input[name=deliveryaddress]').val();
+        var phone = $('input[name=phone]').val();
+        var lenp = phone.length;
+        if(delivery != '' && phone != ''){
+            if (lenp == 10){
+                document.subform.submit();
+            }else{
+                $('#error1').show();
+                $('#error2').hide();
+            }
+        }else{
+            $('#error2').show();
+            $('#error1').hide();
+        }
+    });
+</script>
+{% endblock %}

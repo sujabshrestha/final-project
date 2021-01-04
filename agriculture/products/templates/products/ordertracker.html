@@ -1,0 +1,98 @@
+{% extends 'customer/base1.html' %}
+{% block title %}
+Track Your Order
+{% endblock %}
+
+{% block content %}
+<span style="text-align: center;color: blue;">
+    <h3>
+        {% for message in messages %}
+            {{message}}
+        {% endfor %}
+    </h3>
+</span>
+{% if len != 0 %}
+<div class="orderbanner" style="margin:0;padding: 0;margin-top: -1%;">
+    <form action="">
+        {% csrf_token %}
+        <div class="row">
+            <div class="container">
+                <div class="pro_cont" style="float:left; width: 100%; height: 300px; box-shadow:0px 0px 10px 0px #ddd; margin:60px 0px;">
+                    <div class="col col-6" style="height:300px; background-color: #f2f2f2; padding: 5px 20px 15px 20px; border: 1px solid lightgrey;border-top-left-radius: 3px; border-bottom-left-radius: 3px;">
+                        <h3>Orders</h3>
+                        <label for="odate"><i class="od"></i> Order Date:</label>
+                        {{order.date_posted}}
+                        <br> 
+                        <br>
+                        <label for="onumber"><i class="on"></i> Order Number:</label>
+                        {{order.ordernumber}}<br>
+                        <label for="billto"><i class="bt"></i> Bill To:</label>
+                       {{ order.paymentmethod }} <span style="margin-left: 15px;color: blue;"> {{order.paymentstatus}}</span><br>
+                        
+                        <label for="shipto"><i class="st"></i> Ship To:</label>
+                        {{order.delivery_address}}<br>
+                
+                        <label for="ordertotal"><i class="ortot"></i> Order Total:</label>
+                        {{order.total_amount}}
+                        <br>
+    
+                        <br>
+                    </div>
+                    <div class="col col-6" style="height:300px; border: 1px solid lightgrey;border-top-right-radius: 3px; border-bottom-right-radius: 3px;">
+                        
+                        <div class="invoice" style="text-align: right; background-color: grey;
+                        color: white;
+                        padding: 5px 20px 15px 20px;
+                        border: 1px solid lightgrey;
+                        border-radius: 3px;">
+                                <h4>Invoice#</h4>
+                                
+                        </div>
+                        <div class="status" style="margin-top: 2%;">
+                            <p> STATUS: 
+                                {{order.orderstatus}}
+                            </p>
+                            <p style="margin-left: 70%; margin-top: -6%;">Priority Mail: PRIORITY</p>
+                        </div>
+                    
+                        <div class="row"style="background-color: #f2f2f2;">
+                                <div class="col-6">
+                                    <p> Items added </p>
+                                    
+                                    <label for="itemname"><i class="itn"></i> Item name:</label>
+                                    {{order.product_name}}<br>
+                                    <label for="quantity"><i class="qty"></i> Quantity:</label>
+                                    {{order.product_quantity}}<br>
+                                    <label for="Price"><i class="pr"></i> Price:</label>
+                                    NPR {{order.subtotal}}<br>
+                                    
+        
+                                </div>
+                                <div class="col-6">
+                                    <p> Calculations </p>
+                                    <label for="subtotal"><i class="stot"></i> Subtotal:</label>
+                                    {{order.subtotal}}<br>
+                                
+                                    <label for="shipping"><i class="shi"></i> Shipping:</label>
+                                    {{order.delivery_charge}}<br>
+                                    
+                                    <label for="Total"><i class="tot"></i> Total:</label>
+                                    {{order.total_amount}}<br>
+                                    
+                                <br>
+                                </div>
+                            
+                    </div>
+                
+                
+                    </div> 
+                </div>
+                
+            </div>
+                   
+        </div>
+        
+    </form>
+</div>
+{% endif %}
+{% endblock %}

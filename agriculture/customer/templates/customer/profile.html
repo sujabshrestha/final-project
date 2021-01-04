@@ -1,0 +1,184 @@
+{% extends 'customer/base1.html' %}
+
+{% block css %}
+    <style>
+        #page_numbers{
+            float:left;
+            width:100%;
+
+        }
+        .pagination{
+            float:right;
+        }
+        .product_not_found{
+            float:left;
+            width:100%;
+            height:inherit;
+            padding: 50px 0px;
+        }
+        .u_info span{
+            float:left;
+            width:100%;
+            text-transform: capitalize;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="block" style="float:left; width:100%; height: inherit;">
+  <div class="container">
+    <h1 style=""> PROFILE </h1>
+    <hr>
+    <div class="media" style="width: 50%;float: left;height: inherit;margin-bottom: 50px; padding-left:150px;">
+        <div class="media-img" style="">
+            <img src="/media/{{profile.image}}" alt="" style="height: 100px;width: 100px;">
+        </div>
+        <div class="media-body" style="margin-left:10px;">
+            <h2 class="acount-heading">{{user.username}}</h2>
+            <p class="text-secondary">{{user.email}}</p>
+            
+            <a href="/updateprofile/"><button class="btn btn-primary" style="">Update</button></a>
+        </div>
+    </div>
+    <div class="u_info" style="width:50%; float:left; height:inherit; padding-right:150px;">
+        <span style="font-size:20px;">Contact Number</span>
+        <span style="font-size:18px; color:rgba(0,0,0,.7);">{{profile.phone}}</span>
+        <span style="font-size:20px;">Delivery Address</span>
+        <span style="font-size:18px; color:rgba(0,0,0,.7);">{{profile.delivery}}</span>
+    </div>
+</div>
+<hr style="margin-top: 15%;">
+<div class="container" style="margin-right:15%;margin-left: 6%;">
+    <div class="orderlist" style="width: 50%;float: left;padding: 0px 25px;height: inherit;">
+        <h3 style="text-align:center;">Ordered list</h3>
+        <hr>
+        {% for products, range in allprods %}
+        {% if products %}
+        {% for p in products %}
+        <div class="pl" style="width: 100%;float: left;height: inherit;margin-bottom: 18px;border-bottom: 1px solid #ddd;padding-bottom:8px ;">
+            <span style="width: 20%;float: left;">
+                <img src="/media/{{p.image}}" alt="" style="width: 80px;height: 100px;">
+
+            </span>
+
+            <span  style="width: 50%;float: left;text-transform: capitalize;">
+                <span style="width: 100%;float: left;font-size: 20px;">
+                    {{p.product_name}}
+                </span>
+                <span style="width: 100%;float: left;font-size: 16px;color: rgba(0,0,0,.7);">
+                    quantity: {{p.product_quantity}}
+                </span>
+                <span style="width: 100%;float: left;font-size: 18px;color: blue;">
+                    price: NPR {{p.total_amount}}
+                </span>
+            </span>
+            <span style="width: 30%;float: left;text-transform: capitalize;">
+                <span style="width: 100%;float: left;font-size: 20px;">
+                    order status
+                </span>
+                <span style="width: 100%;float: left;font-size: 18px;color:green;">
+                    {{p.orderstatus}}
+                </span>
+                <span style="width: 100%;float: left;">
+                    {% if p.orderstatus != 'shipping' %}
+                    {% if p.orderstatus != 'delivered' %}
+                    <a href="/ordercancel/{{p.ordernumber}}/"><button type="button" class="btn btn-primary">Cancel</button></a>
+                    {% endif %}
+                    {% endif %}
+                </span>
+            </span>
+
+        </div>
+        {% endfor %}
+        <span id="page_numbers">
+            {% if products.has_other_pages %}
+              <ul class="pagination">
+                {% if products.has_previous %}
+                  <li><a href="?page={{ products.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                  <li class="prev_disabled">&laquo;</li>
+                {% endif %}
+                {% for i in products.paginator.page_range %}
+                  {% if products.number == i %}
+                    <li class="">{{ i }}</li>
+                  {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                  {% endif %}
+                {% endfor %}
+                {% if products.has_next %}
+                  <li><a href="?page={{ products.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                  <li class="next_disabled">&raquo;</li>
+                {% endif %}
+              </ul>
+            {% endif %}
+            </span>
+            {% else %}
+            <div class="product_not_found">
+                <h6>There is no recent orders.</h6>
+            </div>
+            {% endif %}
+            {% endfor %}
+    </div>
+    <div class="cancellist" style="width: 50%;float: left;padding: 0px 25px;height: inherit;">
+        <h3 style="text-align:center;">Cancelled list</h3>
+        <hr>
+        {% for cproducts, range in allcancels %}
+        {% if cproducts %}
+        {% for p in cproducts %}
+        <div class="pl" style="width: 100%;float: left;height: inherit;margin-bottom: 18px;border-bottom: 1px solid #ddd;padding-bottom:8px ;">
+            <span style="width: 20%;float: left;">
+                <img src="/media/{{p.image}}" alt="" style="width: 80px;height: 100px;">
+
+            </span>
+
+            <span  style="width: 50%;float: left;text-transform: capitalize;">
+                <span style="width: 100%;float: left;font-size: 20px;">
+                    {{p.product_name}}
+                </span>
+                <span style="width: 100%;float: left;font-size: 16px;color: rgba(0,0,0,.7);">
+                    quantity: {{p.product_quantity}}
+                </span>
+            </span>
+            <span style="width: 30%;float: left;text-transform: capitalize;">
+                <span style="width: 100%;float: left;font-size: 20px;">
+                  Cancelled
+                </span>
+                
+            </span>
+
+        </div>
+        {% endfor %}
+        <span id="page_numbers">
+            {% if cproducts.has_other_pages %}
+              <ul class="pagination">
+                {% if cproducts.has_previous %}
+                  <li><a href="?page={{ cproducts.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                  <li class="prev_disabled">&laquo;</li>
+                {% endif %}
+                {% for i in cproducts.paginator.page_range %}
+                  {% if cproducts.number == i %}
+                    <li class="">{{ i }}</li>
+                  {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                  {% endif %}
+                {% endfor %}
+                {% if cproducts.has_next %}
+                  <li><a href="?page={{ cproducts.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                  <li class="next_disabled">&raquo;</li>
+                {% endif %}
+              </ul>
+            {% endif %}
+            </span>
+            {% else %}
+            <div class="product_not_found">
+                <h6>There is no recent cancellation.</h6>
+            </div>
+            {% endif %}
+            {% endfor %}
+    </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'customer/base1.html' %}
+{% block title %}
+Product Detail
+{% endblock %}
+{% block css %}
+    <style>
+       span{
+        color:blue;
+        font-weight: 800;
+       } 
+    </style>
+{% endblock %}
+{% block content %}
+
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="orderbanner" style="padding: 0px 0px 30px 0px;width: 100%;">
+          
+            <div class="container" style="display: flex;"> 
+                
+                <div class="osb" style="flex-basis: 50%;">
+                    <img src="{{ product.image.url }}" id="orderimg" alt="" style=" height: 500px;width: 500px;">
+                </div>
+               <div class="right" style="flex-basis: 50%; float: right;">
+                <h1>{{product.title}}</h1>
+                <p> <span>Type</span>:{{product.p_type}}</p>
+                <p> <span>Seller</span>: {{product.author}}</p>
+                {% if product.category == 'vegetable(seed)' %}
+                <p><span>Climate</span>:{{product.climate}}</p>
+                <p><span> Mostly found</span>: {{product.p_area}}</p>
+                <p><span>Growing period</span>:{{product.growingperiod}}</p>
+                <p><span>Soil fertility</span>: {{product.soilfertility}}</p>
+                <p><span>Healthbenifits</span>: {{product.healthbenifits}}</p>
+                {% else %}
+                <p><span>Compostion</span>:{{product.fcomposition}}</p>
+                <p><span>Benifit</span>:{{product.benifits}}</p>
+                {% endif %}
+          
+         
+               <h4></h4>
+                <!-- <div class="osb" style="margin-bottom: 15px;">
+                    Description:
+                    <p style="font-size: 14px;font-weight: 1000;">{{ product.content }}</p>
+                </div> -->
+               
+               </div>
+            </div>
+        </div>
+</div>
+
+
+
+
+
+{% endblock %}

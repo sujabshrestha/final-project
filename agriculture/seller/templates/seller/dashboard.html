@@ -1,0 +1,55 @@
+{% extends 'customer/base1.html' %}
+{% block title %}
+Seller Dashboard
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="container">
+                <div class="container">
+                    <h1 style=""> PROFILE </h1>
+                    <hr>
+                    <div class="media" style="width: 50%;float: left;height: inherit;margin-bottom: 50px; padding-left:150px;">
+                        <div class="media-img" style="">
+                            <img src="/media/{{sellers.image}}" alt="" style="height: 100px;width: 100px;">
+                        </div>
+                        <div class="media-body" style="margin-left:10px;">
+                            <h2 class="acount-heading">{{user.username}}</h2>
+                            <p class="text-secondary">{{user.email}}</p>
+                            
+                            <a href="/seller/updateprof/"><button class="btn btn-primary" style="">Update</button></a>
+                        </div>
+                    </div>
+                    <div class="u_info" style="width:50%; float:left; height:inherit; padding-right:150px;">
+                        <span style="font-size:20px;">Contact Number</span><br>
+                        <span style="font-size:18px; color:rgba(0,0,0,.7);"><span style="font-weight: 600;color: blue;">{{sellers.phone}}</span></span><br>
+                        <span style="font-size:20px;">Delivery Address</span><br>
+                        <span style="font-size:18px; color:rgba(0,0,0,.7);"><span style="font-weight: 600;color: blue;">{{sellers.address}}</span></span>
+                    </div>
+                </div>
+                <hr style="margin-top: 20%;">
+                    <div class="banner2" style="float: left;">
+                        <h3>Your Products</h3>
+                        {% if product %}
+                        {% for prod in product %}
+                        <div class="card" style="width: 15rem;float: left; margin: 10px;">
+                            <img class="card-img-top" src="{{ prod.image.url }}" style="height: 300px;width: 100%;" alt="Card image cap">
+                            <div class="card-body">
+                                <a href="{% url 'orderdetail' prod.id %}"><h5 class="card-title">{{ prod.title }}</h5></a>
+                                <p>{{ prod.author }}</p>
+                                <!-- <p class="card-text">{{ prod.content }}</p> -->
+                                <p class="card-text">NPR {{ prod.price }}</p>
+                                <a href="{% url 'update' prod.id %}" class="btn btn-primary">Update</a>
+                                <a href="{% url 'delete' prod.id %}" class="btn btn-primary">Delete</a>
+                            </div>
+                        </div>
+                        {% endfor %}   
+                        {% else %}
+                            <h5>You have no produtcs</h5>
+                        {% endif %}    
+                    </div>
+                </div>
+
+        </div>
+    </div>
+{% endblock %}

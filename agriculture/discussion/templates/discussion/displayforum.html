@@ -1,0 +1,117 @@
+{% extends 'customer/base1.html' %}
+{% block title %}
+Discussion
+{% endblock %}
+{% block css %}
+    <style>
+        .discuss{
+            margin-bottom: 5px;
+            width: 100%;
+            float: left;
+        }
+        .discuss span{
+            margin-right: 5px;
+            float: left;
+        }
+        .discuss span img{ 
+            height: 20px;
+            width: 20px;
+            
+        }
+        .rep{
+            margin-bottom: 5px;
+            width: 100%;
+            float: left;
+            padding: 0px 20px;
+        }
+ 
+    </style>
+{% endblock %}
+{% block content %}
+        <h2 class="jumbotron">
+            Currently active forums: {{count}}
+            <form method="POST" action="{% url 'addInForum' %}">
+                {% csrf_token %}
+            <button class="btn btn-success" style="width:fit-content; padding: 4px; margin:10px;">Add more</button>
+            </form>
+        </h2>
+            <div class="card-columns" style="padding: 10px; margin: 20px;"></div>
+            
+            
+            {%for forum in forums %}
+            
+                <div class="card box container" style="border: 4px solid black;margin: 0 auto;">
+                    <br>
+                    <h5 class="card-title">
+                        <a href='{{forum.link}}'><h3>{{forum.topic}}</h3></a> 
+                        <p>Category:{{forum.category}}</p>
+                        <div class="card-body">
+                                <span><p>{{forum.description}}</p></span>
+                            </h5>
+                            <hr>
+                            <p> By: {{forum.name}}</p>
+                            email- {{forum.email}}
+                            <hr>     
+                            <h4>Views from other users</h4>
+                            {%for discuss in discussions%}
+                                <span class="discuss">
+                                    <span>
+                                        <img src="/media/{{discuss.image}}" alt="">
+                                    </span>
+                                    <span>
+                                        {{discuss.username}}
+                                    </span>
+                                </span>
+                                <span class="discuss">{{discuss.discuss}}</span>
+                                <span class="rep">
+                                    {% for r in reply %}
+                                    {% if r.discuss_userid == discuss.id %}
+                                    <span class="discuss">
+                                        <span>
+                                            <img src="/media/{{r.image}}" alt="">
+                                        </span>
+                                        <span>
+                                            {{r.username}}
+                                        </span>
+                                        </span>
+                                        <span class="discuss"> {{r.reply|linebreaks}}</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </span>
+                                <span class="discuss">
+                                    <div class="reply"> 
+                                        <button type="button" data-toggle="collapse" data-target="#{{discuss.id}}" aria-expanded="false" aria-controls="replyBox" style="height: 30px;width: 60px;border: none;background: blue;color: white;">Reply</button>
+                                      <div class="collapse" id="{{discuss.id}}">
+                                        <div class="card card-body">
+                                            <form method="POST" action="{% url 'reply' %}">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <label for="reply">Reply</label>
+                                                    <input type="hidden" name="duserid" value="{{discuss.id}}">
+                                                    <textarea class="form-control" id="reply" name="reply" rows="3"></textarea>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                                            </form>
+            
+                                          
+                                        </div>
+                                       
+                                      </div>
+                                   </div>
+                                    
+                                </span>
+
+                           
+                            {%endfor%}
+                           
+                            <a href="{% url 'addInDiscussion' %}"><button class="btn btn-success" style="width:fit-content; padding: 4px; margin:10px;">Add more</button></a>
+                            
+                        </div>
+                </div>
+            </div>
+            <br>
+            
+            {%endfor%}
+          
+{% endblock %}
